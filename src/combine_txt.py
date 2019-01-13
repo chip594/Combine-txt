@@ -4,7 +4,7 @@ import kivy
 kivy.require('1.9.0')
 
 from kivy.core.window import Window
-Window.size = (300, 600)
+Window.size = (350, 150)
 
 import os
 from os.path import abspath, relpath
@@ -20,6 +20,7 @@ class Combine_txt_GridLayout(GridLayout):
 
 class Combine_txtApp(App):
     def build(self):
+        self.title = 'FBPI .txt Combiner'
         return Combine_txt_GridLayout()
 
 ct_app = Combine_txtApp()
