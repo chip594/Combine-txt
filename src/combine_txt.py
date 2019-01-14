@@ -1,30 +1,27 @@
 # combine_txt.py
 
-import kivy
-kivy.require('1.9.0')
-
-from kivy.core.window import Window
-Window.size = (350, 150)
-
 import os
-from os.path import abspath, relpath
-from pathlib import Path
-from kivy.app import App
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.widget import Widget
+import pymsgbox
 
-output_file = open('output.txt', 'w')
+def add_txt_ext(user_input):
+    if len(user_input) < 1:
+        return '_output'
+    else:
+        return user_input
 
-path = ('\\src\\input-dir\\')
-full_path = (os.getcwd() + path)
-file_list = os.listdir(full_path)
+user_input = pymsgbox.prompt('Enter the name of the output file:\n (if blank will default to "_output.txt")')
+if user_input == None:
+    exit(0)
+
+file_list = os.listdir(os.getcwd())
+
+output_file = open((add_txt_ext(user_input) + '.txt'), 'w')
 
 names = []
-tempNames = []
 
 for files in file_list:
     if files.endswith('.txt'):
-        with open(full_path + files, 'r') as f:
+        with open(files, 'r') as f:
             line = f.readline()
             while line:
                 line = line.replace('\n', '')
@@ -32,16 +29,5 @@ for files in file_list:
                 output_file.write(line)
                 line = f.readline()
                 output_file.write('\n')
-
-class Combine_txt_GridLayout(GridLayout):
-    pass
-
-class Combine_txtApp(App):
-    def build(self):
-        self.title = 'FBPI .txt Combiner'
-        return Combine_txt_GridLayout()
-
-ct_app = Combine_txtApp()
-ct_app.run()
 
 output_file.close()
