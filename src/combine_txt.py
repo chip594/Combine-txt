@@ -1,13 +1,29 @@
-# combine_txt.py
+'''
+
+File:           combine_txt.py
+Author:         Chip Newman
+Date:           01/13/19
+Version:        1.0
+
+Description:    This program will read every .txt file within a directory.
+                It will store the names in each of those files within a list
+                and write those names to a single output file. The program will
+                ask the user for a desired output file name, but if one is not 
+                provided then a default name will be used.
+
+                The .exe file must be within the same directory as the .txt files.
+
+'''
 
 import os
 import pymsgbox
 
-# returns the default output file name if the prompt box is empty
-# returns the user input if one is provided
+# ensures that the output file will have a name
 def add_txt_ext(user_input):
+    # runs if the prompt box is empty
     if len(user_input) < 1:
         return '_output'
+    # runs if user input is provided
     else:
         return user_input
 
